@@ -117,7 +117,6 @@ function test(){
         console.log("Seleccionó la opcion: ", op);
     senia = MontoSenia();
 
-    // console.log("Objeto miReserva: ", miReserva);
     miReserva.mostrarReserva();
 
     if (senia != 0){
