@@ -1,0 +1,4 @@
+En este archivo de texto se van a encontrar las aclaraciones y los mensajes que sean necesarios para el Tutor que evalua
+los desafios.
+
+9/08/21 - El archivo esta listo para la entrega de la clase 5 - "Objetos"
