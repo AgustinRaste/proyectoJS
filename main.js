@@ -10,7 +10,9 @@ class DatosReserva{
 
 class Reserva{
     constructor(pDatosReserva, pUsuario){
-        this.datosReserva = pDatosReserva;
+        this.cancha = pDatosReserva.cancha;
+        this.horario = pDatosReserva.horario;
+        this.precio = pDatosReserva.precio;
         this.usuario = pUsuario;
     }
 
@@ -103,29 +105,65 @@ function MontoSenia(){
     return senia;
 }
 
-let op = 0;
-let senia = 0;
-
-function test(){
+function ingresarUser(){
+    alert("INGRESAR DATOS DE USUARIO, PRESIONE ACEPTAR");
     let uNombre = prompt("Ingrese su nombre: ");
     let uApellido = prompt("Ingrese su apellido: ");
     let uDomicilio = prompt("Ingrese su domicilio: ");
-    op = parseInt(MostrarOpciones());
-
     let miUser = new User(uNombre, uApellido, uDomicilio);
-    let miReserva = new Reserva(CalcularReserva(op), miUser);
-        console.log("Seleccionó la opcion: ", op);
-    senia = MontoSenia();
 
-    miReserva.mostrarReserva();
+    return miUser;
 
-    if (senia != 0){
-        miReserva.datosReserva.precio -= senia;
-        alert("Ingresó $" + senia + " de seña, el total a pagar es: $" + miReserva.datosReserva.precio);
+}
+
+
+
+function test(){
+    // Seteo y entrada de datos
+    let arrayReservas = new Array();
+    let senia = 0;
+    let ctrl = 's';
+    let miUser = ingresarUser();
+
+
+    do{
+        do{
+            let op = parseInt(MostrarOpciones());
+            let datosReserva = CalcularReserva(op);
+            var miReserva = new Reserva(datosReserva, miUser);
+            // Esta parte va a ir en una funcion en la proxima version
+            senia = MontoSenia();
+            
+            if (senia != 0){
+                miReserva.precio -= senia;
+                alert("Ingresó $" + senia + " de seña, el total a pagar es: $" + miReserva.precio);
+            }
+            else{
+                alert("El monto a pagar es $" + miReserva.precio);    
+            }
+            // hasta aca! Para crear una funcion especifica que calcule la seña
+            
+            console.log(miReserva);
+            ctrl = prompt("Confirma los datos de la reserva? s/n: ");
+        }while(ctrl == 'n');
+        console.log("Hasta aca llega");
+        arrayReservas.push(miReserva);
+        ctrl = prompt("Desea agregar otra reserva? s/n: ");
+    }while(ctrl == 's');
+    // Al tener una asignacion necesaria antes de evalucar las condiciones,
+    // esto me permite reutilziar la variable ctrl para hacer el control de
+    // flujo.
+    console.log("Lsita de reservas creadas: ");
+    console.log(arrayReservas);
+    ctrl = prompt("Desea ordenar las reservas seguin la cancha? s/n: ");
+    if (ctrl == 's'){
+        console.log("Array Ordenado: ");
+        arrayReservas.sort((a, b) => a.horario - b.horario);
+        console.log(arrayReservas);
+    }else{
+        console.log(arrayReservas);
     }
-    else{
-        alert("El monto a pagar es $" + pr);    
-    }
+    console.log("El programa termina")
 }
 
 
