@@ -155,7 +155,7 @@ function test(){
     // flujo.
     console.log("Lsita de reservas creadas: ");
     console.log(arrayReservas);
-    ctrl = prompt("Desea ordenar las reservas seguin la cancha? s/n: ");
+    ctrl = prompt("Desea ordenar las reservas seguin el horario? s/n: ");
     if (ctrl == 's'){
         console.log("Array Ordenado: ");
         arrayReservas.sort((a, b) => a.horario - b.horario);
