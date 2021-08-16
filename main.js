@@ -1,8 +1,9 @@
 class DatosReserva{
-    constructor(pCancha, pPrecio, pHorario){
+    constructor(pCancha, pPrecio, pHorario, pCantHr){
         this.cancha = pCancha;
         this.precio = pPrecio;
         this.horario = pHorario;
+        this.cantHr = pCantHr;
     }
 }
 
@@ -12,6 +13,7 @@ class Reserva{
     constructor(pDatosReserva, pUsuario){
         this.cancha = pDatosReserva.cancha;
         this.horario = pDatosReserva.horario;
+        this.cantHr = pDatosReserva.cantHr;
         this.precio = pDatosReserva.precio;
         this.usuario = pUsuario;
     }
@@ -89,14 +91,12 @@ function CalcularReserva(o){
 
     }
 
-    let miDatosReserva = new DatosReserva(cancha, precio, horario)
+    let miDatosReserva = new DatosReserva(cancha, precio, horario, hr)
     return miDatosReserva;
 }
 
 function MostrarOpciones(){
-    let o;
-    o = prompt("SELECCIONE UNA OPCION: \n \t 1- FUTBOL \n \t 2- TENIS \n \t 3- PADDLE")
-    return o;
+    alert("SELECCIONE UNA OPCION: \n \t 1- FUTBOL \n \t 2- TENIS \n \t 3- PADDLE \n \t Presione aceptar para continuar.")
 }
 
 function MontoSenia(){
@@ -115,7 +115,17 @@ function ingresarUser(){
     return miUser;
 
 }
+// En esta funcion se valida la entrada de datos, estableciento un limite inferior y uno superior (Ambos incluidos)
+function validarEntrada(inf, sup){
+    let dato = prompt('Ingrese una opcion entre ' + inf + 'y ' + sup);
+    while (dato > sup || dato < inf){
+        alert('ERROR! El dato a ingresar debe esta entre ' + inf + ' y ' + sup);
+        dato = prompt('Ingrese nuevamente la opcion: ')
+    }
 
+    return dato;
+
+}
 
 
 function test(){
@@ -128,7 +138,8 @@ function test(){
 
     do{
         do{
-            let op = parseInt(MostrarOpciones());
+            MostrarOpciones();
+            let op = parseInt(validarEntrada(1,3))
             let datosReserva = CalcularReserva(op);
             var miReserva = new Reserva(datosReserva, miUser);
             // Esta parte va a ir en una funcion en la proxima version
@@ -150,7 +161,7 @@ function test(){
         arrayReservas.push(miReserva);
         ctrl = prompt("Desea agregar otra reserva? s/n: ");
     }while(ctrl == 's');
-    // Al tener una asignacion necesaria antes de evalucar las condiciones,
+    // Al tener una asignacion necesaria antes de evaluar las condiciones,
     // esto me permite reutilziar la variable ctrl para hacer el control de
     // flujo.
     console.log("Lsita de reservas creadas: ");
