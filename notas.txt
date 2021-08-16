@@ -2,3 +2,6 @@ En este archivo de texto se van a encontrar las aclaraciones y los mensajes que 
 los desafios.
 
 9/08/21 - El archivo esta listo para la entrega de la clase 5 - "Objetos"
+
+
+16/08/21 - El archivo esta listo para la re-enmtrega del proyercto

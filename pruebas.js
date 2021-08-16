@@ -1,4 +1,4 @@
-let array = [{id:"12", nom:"Pewdro", edad:20},{id:"12", nom:"Cesar", edad:23},{id:"13", nom:"Pdro", edad:12}]
+let array = [{id:"12", nom:"Pedro", edad:20},{id:"12", nom:"Cesar", edad:23},{id:"13", nom:"Pdro", edad:12}]
 
 
 
