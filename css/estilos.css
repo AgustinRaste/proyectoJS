@@ -1,0 +1,6 @@
+.menu ul {
+  display: flex;
+  flex-direction: column;
+  color: green; }
+
+/* Archivo de prueba para instalar SASS en el proyecto */
