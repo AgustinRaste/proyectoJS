@@ -88,7 +88,7 @@ function CalcularReserva(o){
             cancha = 'Paddle'              
             alert("El precio total es: " + precio);
             break;
-
+        
     }
 
     let miDatosReserva = new DatosReserva(cancha, precio, horario, hr)
@@ -127,6 +127,17 @@ function validarEntrada(inf, sup){
 
 }
 
+function agregarReserva(reserva){
+    datos = "<p>Cancha: " + reserva.cancha + "</p>" + "<p>Hora: " + reserva.horario + "</p>" + "<p>$" + reserva.precio + "</p>" + "<hr/>"
+    var elementoReservas = document.createElement("div");
+    elementoReservas.innerHTML = datos;
+    document.getElementById("reservas").appendChild(elementoReservas);
+}
+
+function agregarUser(user){
+    document.getElementById("nombreUser").innerHTML = user.nombre + " " + user.apellido;
+}
+
 
 function test(){
     // Seteo y entrada de datos
@@ -134,7 +145,7 @@ function test(){
     let senia = 0;
     let ctrl = 's';
     let miUser = ingresarUser();
-
+    agregarUser(miUser);
 
     do{
         do{
@@ -159,6 +170,7 @@ function test(){
         }while(ctrl == 'n');
         console.log("Hasta aca llega");
         arrayReservas.push(miReserva);
+        agregarReserva(miReserva);
         ctrl = prompt("Desea agregar otra reserva? s/n: ");
     }while(ctrl == 's');
     // Al tener una asignacion necesaria antes de evaluar las condiciones,

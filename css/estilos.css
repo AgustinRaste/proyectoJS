@@ -1,6 +1,84 @@
-.menu ul {
+* {
+  margin: 0;
+  padding: 0; }
+
+.menu {
+  width: 100%;
+  height: 10vh;
+  background-color: gray;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center; }
+  .menu ul {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    list-style-type: none; }
+
+.listadoCanchas {
+  height: 80vh;
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  align-items: center;
+  background-image: url("/images/pic03.jpg"); }
+
+.canchaFutbol {
+  background-color: aqua;
+  height: 80%;
+  width: 200px;
   display: flex;
   flex-direction: column;
-  color: green; }
+  align-items: center;
+  border-radius: 15px; }
+
+.canchaTenis {
+  background-color: green;
+  height: 80%;
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 15px; }
+
+.canchaPaddle {
+  background-color: gray;
+  height: 80%;
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 15px; }
+
+#reservas {
+  background-color: gray;
+  height: 80%;
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 15px; }
+
+.imgArticulo {
+  height: 50%;
+  width: 100%;
+  border-radius: 15px; }
+
+footer {
+  width: 100%;
+  height: 100px; }
+  footer ol {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    list-style-type: none;
+    background-color: gray; }
 
 /* Archivo de prueba para instalar SASS en el proyecto */

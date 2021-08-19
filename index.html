@@ -4,11 +4,12 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="estilos.css">
+    <link rel="stylesheet" href="css/estilos.css">
     <title>Pro Deportes</title>
 </head>
 <body>
     <nav class = "menu">
+        <h2>Logo</h2>
         <ul>
             <li>HOME</li>
             <li>MI RESERVA</li>
@@ -16,10 +17,34 @@
         </ul>
         <div class="botonReserva"></div>
     </nav>
-    <section>
-        <article class="canchaFutbol"></article>
-        <article class="canchaTenis"></article>
-        <article class="canchaPaddle"></article>
+    <section class="listadoCanchas">
+        <article class="canchaFutbol">
+            <img class="imgArticulo" src="images/futbol1.jpg" alt="">
+            <h3>Futbol</h3>
+            <h4>$900/h</h4>
+            <button class="botonReserva">RESERVAR</button>
+        </article>
+        <article class="canchaTenis">
+            <img class="imgArticulo" src="images/tenis1.jpeg" alt="">
+            <h3>Tenis</h3>
+            <h4>$800/h</h4>
+            <button class="botonReserva">RESERVAR</button>
+        </article>
+        <article class="canchaPaddle">
+            <img class="imgArticulo" src="images/paddle1.jpg" alt="">
+            <h3>Paddle</h3>
+            <h4>$700/h</h4>
+            <button class="botonReserva">RESERVAR</button>
+        </article>
+        <!-- Agrego unos inputs apra los datos de usuario pero son solo temporal
+        la idea es hacer despues una seccion especifica para este tema -->
+        <div id="reservas">
+            <h3>Datos de la Reserva</h3>
+            <p id="nombreUser">Nombre usuario</p>
+            <h4>Reservas:</h4>
+                <!-- Aca se van a agregar los p con los datos que inserte desde el DOM
+                con los datos de las reservas que se van realizando -->
+        </div>
     </section>
     <footer>
         <ol>
@@ -28,6 +53,6 @@
             <li>Numero de telefono</li>
         </ol>
     </footer>
-    <script src = "main.js"></script>
+   <script src = "main.js"></script>
 </body>
 </html>
