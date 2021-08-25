@@ -1,10 +1,25 @@
-let array = [{id:"12", nom:"Pedro", edad:20},{id:"12", nom:"Cesar", edad:23},{id:"13", nom:"Pdro", edad:12}]
+function agregarReserva(){
+    // let nombre = document.getElementById("nombreUserIn").value;
+    // let apellido = document.getElementById("nombreUserIn").value;
+    // let domicilio = document.getElementById("nombreUserIn").value;
+    // datos = nombre + " " + apellido + " " + domicilio;
+    // var elementoReservas = document.createElement("div");
+    // elementoReservas.innerHTML = datos;
+    // document.getElementById("reservas").appendChild(elementoReservas);
+    console.log("RESERVA AGREGADA");
+}
+
+function test(){
+        let btnConfirmar = document.getElementById("btnConfirmar");
+        btnConfirmar.addEventListener("click", agregarReserva);
+}
+// function respuestaClick(){
+//     console.log("Respuesta evento");
+//   }
 
 
+// let boton = document.getElementById("btnConfirmar")
+//       boton.addEventListener("click", respuestaClick)
 
-console.log(array);
 
-array.sort(function (a, b){a.edad-b.edad});
-
-console.log();
-console.log(array);
+test()

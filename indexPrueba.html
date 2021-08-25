@@ -4,22 +4,56 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
     <title>Pro Deportes</title>
 </head>
 <body>
-    <nav class = "menu">
-        <ul>
-            <li>HOME</li>
-            <li>MI RESERVA</li>
-            <li>GALERIA</li>
-        </ul>
-        <div class="botonReserva"></div>
-    </nav>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">Navbar</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+              <a class="nav-link active" aria-current="page" href="#">Home</a>
+              <a class="nav-link" href="#">Features</a>
+              <a class="nav-link" href="#">Pricing</a>
+              <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+
     <section>
-        <article class="canchaFutbol"></article>
-        <article class="canchaTenis"></article>
-        <article class="canchaPaddle"></article>
+        <div class="card text-center" style="width: 18rem;">
+            <div class="card-body">
+                <h3>Datos de usuario</h3>
+                <div class="form-floating mb-3">
+                    <input id="nombreUserIn" type="text" class="form-control" id="floatingInput" placeholder="name@example.com">
+                    <label for="floatingInput">Nombre</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input id="apellidoUserIn" type="text" class="form-control" id="floatingInput" placeholder="name@example.com">
+                    <label for="floatingInput">Apellido</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input id="domicilioUserIn" type="text" class="form-control" id="floatingInput" placeholder="name@example.com">
+                    <label for="floatingInput">Domicilio</label>
+                </div>
+                <button id= "btnConfirmar">Confirmar</button>
+                <input id="2btnConfirmar" class="btn btn-primary" type="submit" value="Confirmar">
+            </div>
+        </div>
     </section>
+
+    <div class="card text-center" style="width: 18rem;">
+        <div id="reservas" class="card-body">
+        </div>
+    </div>
+    
+    
     <footer>
         <ol>
             <li><a href="###">Instagram</a></li>
@@ -27,6 +61,7 @@
             <li>Numero de telefono</li>
         </ol>
     </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
     <script src = "pruebas.js"></script>
 </body>
 </html>
