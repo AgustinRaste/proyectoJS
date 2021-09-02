@@ -1,3 +1,4 @@
+
 class DatosReserva{
     constructor(pCancha, pPrecio, pHorario){
         this.cancha = pCancha;
@@ -113,7 +114,8 @@ function confirmarUser(){
 
 
     console.log("Usuario ingresado!");
-    document.getElementById("nombreUser").innerHTML = uNombre.value + " " + uApellido.value;
+    $("#nombreUser").text(uNombre.value + " " + uApellido.value);
+    // document.getElementById("nombreUser").innerHTML = uNombre.value + " " + uApellido.value;
     uNombre.setAttribute("disabled", " ");
     uApellido.setAttribute("disabled", " ");
     uDomicilio.setAttribute("disabled", " ");
@@ -145,7 +147,10 @@ function accionesReset(){
     document.getElementById("selecHora").setAttribute("disabled", "");
     document.getElementById("montoSenia").setAttribute("disabled", "");
 
-    
+    document.getElementById("selecCancha").value = " ";
+    document.getElementById("selecHora").value = " ";
+    document.getElementById("montoSenia").value = " ";
+
 }
 
 
@@ -165,99 +170,73 @@ function agregarReserva(){
         cancha = "Paddle";
     }
     
-    datos = "<p>Cancha: " + cancha + "</p>" + "<p>Hora: " + miDatosReserva.horario + "</p>" + "<p>$" + miDatosReserva.precio + "</p>" + "<hr/>"
-    var elementoReservas = document.createElement("div");
-    elementoReservas.innerHTML = datos;
-    document.getElementById("reservas").appendChild(elementoReservas);
+    // Se agrega la reserva a la lista
+    $("#reservas").append(`<p>Cancha: ${cancha} </p> 
+                <p>Hora: ${miDatosReserva.horario}</p>
+                <p>$ ${miDatosReserva.precio}</p>
+                <hr/>`)
+    
+    
     btnReservar.setAttribute("style", "display: none");
 
 
     let horario = document.getElementById(miDatosReserva.horario);
-    horario.setAttribute("disabled", " ");
-
+    // $("#selecHora").remove(`<option id="22" value="22">22:00</option>`)
+    console.log(horario)
+    console.log(miDatosReserva.horario)
 }
 
 
 
 function agregarUser(user){
-    document.getElementById("nombreUser").innerHTML = user.nombre + " " + user.apellido;
+    $("#nombreUser").append("HOLA")
+    // document.getElementById("nombreUser").innerHTML = user.nombre + " " + user.apellido;
 }
+
+// function listarHorarios(cancha){
+//     let miDatosReserva = JSON.parse(sessionStorage.getItem("miDatosReservaJSON"));
+    
+//     if (miDatosReserva.cancha == '1'){
+//         cancha = "Futbol";
+//     }
+//     else if (miDatosReserva.cancha == '2'){
+//         cancha = "Tenis";
+//     }
+//     else if (miDatosReserva.cancha == '3'){
+//         cancha = "Paddle";
+//     }
+// }
 
 
 function test(){
+    // var horariosFutbol = new Array(20,25,26,27,28,29)
+    // var horariosTenis = new Array(17,18,19)
+    // var horariosPaddle = new Array(10,11,12,13,14)
+
     // Seteo y entrada de datos
-    let btnConfirmar = document.getElementById("btnConfirmar");
-    let btnReservar = document.getElementById("btnReservar");
-    let btnReset = document.getElementById("btnReset");
-    let btnCalcular = document.getElementById("btnCalcular");
-    
-    document.getElementById("selecCancha").setAttribute("disabled", "")
-    document.getElementById("selecHora").setAttribute("disabled", "")
-    document.getElementById("montoSenia").setAttribute("disabled", "");
+   
+    $("#selecCancha").attr("disabled", "");
+    $("#selecHora").attr("disabled", "");
+    $("#montoSenia").attr("disabled", "")
+
+
 
     // se esconde el boton de reset hasta que se ingresen los datos
-    btnReset.setAttribute("style", "display: none");
-    btnReservar.setAttribute("style", "display: none");
 
-
+    $('#btnReservar').attr("style", "display: none");
+    $('#btnReset').attr("style", "display: none");
     // EVENTOS DE BOTONES
-    btnConfirmar.addEventListener("click", confirmarUser);
-    btnReservar.addEventListener("click", agregarReserva);
-    btnReset.addEventListener("click", accionesReset);
-    btnCalcular.addEventListener("click", calcularReserva);
-
+    // btnConfirmar.addEventListener("click", confirmarUser);
+    $("#btnConfirmar").on("click", confirmarUser);
+    $('#btnReservar').on("click", agregarReserva);
+    $('#btnReset').on("click", accionesReset);
+    $('#btnCalcular').on("click", calcularReserva);
+    
     let miDatosReserva = JSON.parse(sessionStorage.getItem("miDatosReservaJSON"));
-
+    
     let precio = document.getElementById("displayPrecio");
     precio.innerHTML = document.getElementById("selecCancha").value;
 
-
-
-
-
-
-
-
-
-//     do{
-//         do{
-//             let op = document.getElementById("selecCancha").getAttribute("value");
-//             let datosReserva = CalcularReserva(op);
-//             var miReserva = new Reserva(datosReserva, miUser);
-//             // Esta parte va a ir en una funcion en la proxima version
-//             // senia = MontoSenia();
-            
-//             // if (senia != 0){
-//             //     miReserva.precio -= senia;
-//             //     alert("Ingresó $" + senia + " de seña, el total a pagar es: $" + miReserva.precio);
-//             // }
-//             // else{
-//             //     alert("El monto a pagar es $" + miReserva.precio);    
-//             // }
-//             // hasta aca! Para crear una funcion especifica que calcule la seña
-            
-//             console.log(miReserva);
-//             ctrl = prompt("Confirma los datos de la reserva? s/n: ");
-//         }while(ctrl == 'n');
-//         console.log("Hasta aca llega");
-//         arrayReservas.push(miReserva);
-//         agregarReserva(miReserva);
-//         ctrl = prompt("Desea agregar otra reserva? s/n: ");
-//     }while(ctrl == 's');
-//     // Al tener una asignacion necesaria antes de evaluar las condiciones,
-//     // esto me permite reutilziar la variable ctrl para hacer el control de
-//     // flujo.
-//     console.log("Lsita de reservas creadas: ");
-//     console.log(arrayReservas);
-//     ctrl = prompt("Desea ordenar las reservas seguin el horario? s/n: ");
-//     if (ctrl == 's'){
-//         console.log("Array Ordenado: ");
-//         arrayReservas.sort((a, b) => a.horario - b.horario);
-//         console.log(arrayReservas);
-//     }else{
-//         console.log(arrayReservas);
-//     }
-//     console.log("El programa termina")
 }
 
 
