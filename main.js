@@ -100,7 +100,9 @@ function MontoSenia(){
 }
 
 function confirmarUser(){
-    $("#datosReserva").fadeIn(1000, $("#btnReset").fadeIn(1500)) 
+    // $("#datosReserva").fadeIn(1000) 
+    $("#datosReserva").fadeIn(1000, function (){ $("#btnReset").fadeIn(1500)} )
+    // $("#btnReset").fadeIn(1500) 
 
     let uNombre = document.getElementById("nombreUserIn");
     let uApellido = document.getElementById("apellidoUserIn");
@@ -122,7 +124,7 @@ function confirmarUser(){
     uNombre.setAttribute("disabled", " ");
     uApellido.setAttribute("disabled", " ");
     uDomicilio.setAttribute("disabled", " ");
-    btnReset.setAttribute("style", " ");
+
     document.getElementById("selecCancha").removeAttribute("disabled", "");
     document.getElementById("selecHora").removeAttribute("disabled", "");
     document.getElementById("montoSenia").removeAttribute("disabled", "");
@@ -191,10 +193,10 @@ function agregarReserva(){
 
 
 
-function agregarUser(user){
-    $("#nombreUser").append("HOLA")
-    // document.getElementById("nombreUser").innerHTML = user.nombre + " " + user.apellido;
-}
+// function agregarUser(user){
+//     $("#nombreUser").append("HOLA")
+//     // document.getElementById("nombreUser").innerHTML = user.nombre + " " + user.apellido;
+// }
 
 // function listarHorarios(cancha){
 //     let miDatosReserva = JSON.parse(sessionStorage.getItem("miDatosReservaJSON"));
