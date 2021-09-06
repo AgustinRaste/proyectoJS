@@ -77,6 +77,7 @@ function calcularReserva(){
 
     horario = document.getElementById("selecHora").value;
     cancha = seleccion.value;
+    
     document.getElementById("displayPrecio").innerHTML = "$" + precio;
     document.getElementById("displaySenia").innerHTML = "$" + montoSenia;
     document.getElementById("displayPrecioFinal").innerHTML = "$" + precioFinal;
@@ -99,6 +100,8 @@ function MontoSenia(){
 }
 
 function confirmarUser(){
+    $("#datosReserva").fadeIn(1000, $("#btnReset").fadeIn(1500)) 
+
     let uNombre = document.getElementById("nombreUserIn");
     let uApellido = document.getElementById("apellidoUserIn");
     let uDomicilio = document.getElementById("domicilioUserIn");
@@ -143,9 +146,9 @@ function accionesReset(){
     document.getElementById("apellidoUserIn").removeAttribute("disabled", " ");
     document.getElementById("domicilioUserIn").removeAttribute("disabled", " ");
 
-    document.getElementById("selecCancha").setAttribute("disabled", "");
-    document.getElementById("selecHora").setAttribute("disabled", "");
-    document.getElementById("montoSenia").setAttribute("disabled", "");
+    $("#selecCancha").attr("disabled", "");
+    $("#selecHora").attr("disabled", "");
+    $("#montoSenia").attr("disabled", "");
 
     document.getElementById("selecCancha").value = " ";
     document.getElementById("selecHora").value = " ";
@@ -156,7 +159,7 @@ function accionesReset(){
 
 
 function agregarReserva(){
-
+    $("#reservas").slideDown(500)
 
     let miDatosReserva = JSON.parse(sessionStorage.getItem("miDatosReservaJSON"));
     
@@ -209,16 +212,17 @@ function agregarUser(user){
 
 
 function test(){
+
+    $("#datosUser").fadeIn(1000)
+    // $("#datosReserva").slideDown(2000)
+
+
     // var horariosFutbol = new Array(20,25,26,27,28,29)
     // var horariosTenis = new Array(17,18,19)
     // var horariosPaddle = new Array(10,11,12,13,14)
 
     // Seteo y entrada de datos
    
-    $("#selecCancha").attr("disabled", "");
-    $("#selecHora").attr("disabled", "");
-    $("#montoSenia").attr("disabled", "")
-
 
 
     // se esconde el boton de reset hasta que se ingresen los datos
