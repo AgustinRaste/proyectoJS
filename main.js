@@ -51,6 +51,16 @@ class User{
 
 }
 
+class Cancha{
+    constructor(pId, pNombre, pHorarios, pDescripcion){
+        this.id = pId;
+        this.nombre = pNombre;
+        this.horarios = pHorarios;
+        this.descripcion = pDescripcion;
+    }
+}
+
+
 
 
 
@@ -101,7 +111,7 @@ function MontoSenia(){
 
 function confirmarUser(){
     // $("#datosReserva").fadeIn(1000) 
-    $("#datosReserva").fadeIn(1000, function (){ $("#btnReset").fadeIn(1500)} )
+    $("#datosReserva").fadeIn(1000, function (){    $("#btnReset").fadeIn(1500);} )
     // $("#btnReset").fadeIn(1500) 
 
     let uNombre = document.getElementById("nombreUserIn");
@@ -186,46 +196,58 @@ function agregarReserva(){
 
 
     let horario = document.getElementById(miDatosReserva.horario);
-    // $("#selecHora").remove(`<option id="22" value="22">22:00</option>`)
     console.log(horario)
     console.log(miDatosReserva.horario)
 }
 
 
+function listarHorarios(){
+    let seleccion = $("#selecCancha").val();
+    const URLJSON = "canchas.json";
 
-// function agregarUser(user){
-//     $("#nombreUser").append("HOLA")
-//     // document.getElementById("nombreUser").innerHTML = user.nombre + " " + user.apellido;
-// }
+    // Aplico este metodo para borrar los options cargados en otra ocasion 
+    $("#selecHora").empty();
 
-// function listarHorarios(cancha){
-//     let miDatosReserva = JSON.parse(sessionStorage.getItem("miDatosReservaJSON"));
     
-//     if (miDatosReserva.cancha == '1'){
-//         cancha = "Futbol";
-//     }
-//     else if (miDatosReserva.cancha == '2'){
-//         cancha = "Tenis";
-//     }
-//     else if (miDatosReserva.cancha == '3'){
-//         cancha = "Paddle";
-//     }
-// }
+    $.getJSON(URLJSON, function (respuesta, estado) {
+        if(estado === "success"){
+            let misDatos = respuesta;
+
+            let horariosDisp = misDatos[seleccion - 1].horarios
+            
+            
+            if (seleccion == '1'){
+                
+                for (const horario in horariosDisp){
+                    $("#selecHora").append(`<option>${horariosDisp[horario]}</option>`)
+                    
+                }
+            }
+            if (seleccion == '2'){
+                
+                for (const horario in horariosDisp){
+                    $("#selecHora").append(`<option>${horariosDisp[horario]}</option>`)
+                    console.log(horariosDisp[horario])
+                }
+                
+            }
+            if (seleccion == '3'){
+                
+                for (const horario in horariosDisp){
+                    $("#selecHora").append(`<option>${horariosDisp[horario]}</option>`)
+                    console.log(horariosDisp[horario])
+                }
+                
+            }
+        };
+    });
+
+};
 
 
 function test(){
 
     $("#datosUser").fadeIn(1000)
-    // $("#datosReserva").slideDown(2000)
-
-
-    // var horariosFutbol = new Array(20,25,26,27,28,29)
-    // var horariosTenis = new Array(17,18,19)
-    // var horariosPaddle = new Array(10,11,12,13,14)
-
-    // Seteo y entrada de datos
-   
-
 
     // se esconde el boton de reset hasta que se ingresen los datos
 
@@ -237,9 +259,8 @@ function test(){
     $('#btnReservar').on("click", agregarReserva);
     $('#btnReset').on("click", accionesReset);
     $('#btnCalcular').on("click", calcularReserva);
-    
-    let miDatosReserva = JSON.parse(sessionStorage.getItem("miDatosReservaJSON"));
-    
+    $('#selecCancha').change( listarHorarios);
+            
     let precio = document.getElementById("displayPrecio");
     precio.innerHTML = document.getElementById("selecCancha").value;
 
@@ -247,4 +268,4 @@ function test(){
 
 
 //Llamada a la funcion test
-test()
+test();

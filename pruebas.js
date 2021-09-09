@@ -34,102 +34,94 @@ function borrarHorario(){
 
 
  function listarHorarios(){
-    let opcion = document.createElement("option");
-    let seleccion = document.getElementById("selecCancha").value;
-    let listaHora = document.getElementById("selecHora");
+    let seleccion = $("#selecCancha").val();
+    const URLJSON = "canchas.json";
+
+    // Aplico este metodo para borrar los options cargados en otra ocasion 
+    $("#selecHora").empty();
+
     
-    
-    let opciones = new Array();
+    $.getJSON(URLJSON, function (respuesta, estado) {
+        if(estado === "success"){
+            let misDatos = respuesta;
 
-    let horarios = JSON.parse(sessionStorage.getItem("canchaFutbolJSON"));
-
-    console.log(horarios);
-
-
-    if (seleccion == "1"){
-        for ( let i = 0 ; i < 5; i++){
-            let horarios = JSON.parse(sessionStorage.getItem("canchaFutbolJSON"));
-            let opcion = document.createElement("option");
+            let horariosDisp = misDatos[seleccion - 1].horarios
             
-            opciones.push(opcion);
             
-            opciones[i].innerHTML = "<p>"+ horarios[i] +"</p>";
-            
-            listaHora.appendChild(opciones[i]);
-        }
-    }
+            if (seleccion == '1'){
+                
+                for (const horario in horariosDisp){
+                    $("#selecHora").append(`<option>${horariosDisp[horario]}</option>`)
+                    
+                }
+            }
+            if (seleccion == '2'){
+                
+                for (const horario in horariosDisp){
+                    $("#selecHora").append(`<option>${horariosDisp[horario]}</option>`)
+                    console.log(horariosDisp[horario])
+                }
+                
+            }
+            if (seleccion == '3'){
+                
+                for (const horario in horariosDisp){
+                    $("#selecHora").append(`<option>${horariosDisp[horario]}</option>`)
+                    console.log(horariosDisp[horario])
+                }
+                
+            }
+        };
+    });
 
-
-    if (seleccion == "2"){
-        for ( let i = 0 ; i < 5; i++){
-            let horarios = JSON.parse(sessionStorage.getItem("canchaTenisJSON"));
-            let opcion = document.createElement("option");
-            
-            opciones.push(opcion);
-            
-            opciones[i].innerHTML = "<p>"+ horarios[i] +"</p>";
-            
-            listaHora.appendChild(opciones[i]);
-        } 
-    }
-
-
-    if (seleccion == "3"){
-        for ( let i = 0 ; i < 5; i++){
-            let horarios = JSON.parse(sessionStorage.getItem("canchaPaddleJSON"));
-            let opcion = document.createElement("option");
-            
-            opciones.push(opcion);
-            
-            opciones[i].innerHTML = "<p>"+ horarios[i] +"</p>";
-            
-            listaHora.appendChild(opciones[i]);   
-        }
-        
-    }
- 
- }
-
-
-    function agragar(){
-        let cancha = JSON.parse(sessionStorage.getItem("canchaPaddleJSON"));
-        let horarios = cancha.horarios;
-        // const option = document.createElement('option');
-        // const selec = document.getElementById("selecHora");
-        // const valor = new Date().getTime();
-        for ( let i = 0 ; i < 5; i++){
-            $("#selecHora").append(`<option>${horarios[i]}</option>`)
-            // option.value = horarios[i];
-            // option.text = valor;
-            // selec.appendChild(option);
-            console.log("Agrega una opcion");
-        }
-
-      };
+};
 
 
 
 function test(){
+        //Declaramos la url del archivo JSON local
+        const URLJSON = "canchas.json";
+        //Agregamos un botón con jQuery
+        $("body").prepend('<button id="btn1">JSON</button>');
 
-        let canchaTenis = new Cancha("Tenis");
-        let canchaFutbol = new Cancha("Futbol");
-        let canchaPaddle = new Cancha("Paddle");
+        $("#btn1").click(() => { 
+            $.getJSON(URLJSON, function (respuesta, estado) {
+                if(estado === "success"){
+                  let misDatos = respuesta;
+                  console.log(misDatos)
+                  for (let i = 0; i < 4; i++) {
+                    $("body").prepend(`<div>
+                    ${misDatos[0]}
+                                            <h3>${misDatos[0].id}</h3>
+                                            <p> ${misDatos[0].nombre}</p>
+                                            <p> ${misDatos[0].horarios[10]}</p>
+                                        </div>`)
+                  }  
+                }
+                });
+            });
 
-        let canchaFutbolJSON = JSON.stringify(canchaFutbol);
-        sessionStorage.setItem("canchaFutbolJSON", canchaFutbolJSON);
-        let canchaTenisJSON = JSON.stringify(canchaTenis);
-        sessionStorage.setItem("canchaTenisJSON", canchaTenisJSON);
-        let canchaPaddleJSON = JSON.stringify(canchaPaddle);
-        sessionStorage.setItem("canchaPaddleJSON", canchaPaddleJSON);
+        $('#selecCancha').change( listarHorarios);
+            
+        // let canchaTenis = new Cancha("Tenis");
+        // let canchaFutbol = new Cancha("Futbol");
+        // let canchaPaddle = new Cancha("Paddle");
 
-        // let btnConfirmar = document.getElementById("btnConfirmar");
-        // btnConfirmar.addEventListener("click", agragar);
-        $("#btnConfirmar").on("click", () => {console.log("click en confirma")});
-        let btnConfirmarDOS = document.getElementById("2btnConfirmar");
-        btnConfirmarDOS.addEventListener("click", agragar);
+        // let canchaFutbolJSON = JSON.stringify(canchaFutbol);
+        // sessionStorage.setItem("canchaFutbolJSON", canchaFutbolJSON);
+        // let canchaTenisJSON = JSON.stringify(canchaTenis);
+        // sessionStorage.setItem("canchaTenisJSON", canchaTenisJSON);
+        // let canchaPaddleJSON = JSON.stringify(canchaPaddle);
+        // sessionStorage.setItem("canchaPaddleJSON", canchaPaddleJSON);
 
-        let listadoCancha = document.getElementById("selecCancha");
-        listadoCancha.addEventListener("change", agragar);
+        // // let btnConfirmar = document.getElementById("btnConfirmar");
+        // // btnConfirmar.addEventListener("click", agragar);
+        // $("#btnConfirmar").on("click", () => {console.log("click en confirma")});
+        // let btnConfirmarDOS = document.getElementById("2btnConfirmar");
+        // btnConfirmarDOS.addEventListener("click", agragar);
+
+        // let listadoCancha = document.getElementById("selecCancha");
+        // listadoCancha.addEventListener("change", agragar);
 
 }
 // function respuestaClick(){

@@ -1,0 +1,14 @@
+[
+    {"id": "1",
+        "nombre": "Futbol",
+        "horarios": [20,21,22,23],
+        "descripcion": "Cancha de futbol 7 con cesped sintetico"},
+    {"id": "2",
+        "nombre": "Tenis",
+        "horarios": [16,17,18,19],
+        "descripcion": "Cancha de Tenis de polvio de ladrillo"},
+    {"id": "3",
+        "nombre": "Paddle",
+        "horarios": [12,13,14,15],
+        "descripcion": "Cancha de Paddle de cesped sintetico con paredes de acrilico"}
+    ]
