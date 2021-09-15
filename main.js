@@ -166,6 +166,10 @@ function accionesReset(){
     document.getElementById("selecHora").value = " ";
     document.getElementById("montoSenia").value = " ";
 
+    $("#datosReserva").fadeOut(1000);
+    $("#reservas").fadeOut(1000);
+    $("div").remove(".reservaCreada");
+
 }
 
 
@@ -186,10 +190,12 @@ function agregarReserva(){
     }
     
     // Se agrega la reserva a la lista
-    $("#reservas").append(`<p>Cancha: ${cancha} </p> 
-                <p>Hora: ${miDatosReserva.horario}</p>
-                <p>$ ${miDatosReserva.precio}</p>
-                <hr/>`)
+    $("#reservas").append(`<div class="reservaCreada">
+                            <p>Cancha: ${cancha} </p> 
+                            <p>Hora: ${miDatosReserva.horario}</p>
+                            <p>$ ${miDatosReserva.precio}</p>
+                            <hr/>
+                            </div>`)
     
     
     btnReservar.setAttribute("style", "display: none");
@@ -254,15 +260,12 @@ function test(){
     $('#btnReservar').attr("style", "display: none");
     $('#btnReset').attr("style", "display: none");
     // EVENTOS DE BOTONES
-    // btnConfirmar.addEventListener("click", confirmarUser);
     $("#btnConfirmar").on("click", confirmarUser);
     $('#btnReservar').on("click", agregarReserva);
     $('#btnReset').on("click", accionesReset);
     $('#btnCalcular').on("click", calcularReserva);
     $('#selecCancha').change( listarHorarios);
-            
-    let precio = document.getElementById("displayPrecio");
-    precio.innerHTML = document.getElementById("selecCancha").value;
+
 
 }
 
