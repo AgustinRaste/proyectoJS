@@ -104,31 +104,7 @@ function test(){
 
         $('#selecCancha').change( listarHorarios);
         
-        const settings = {
-            "async": true,
-            "crossDomain": true,
-            "url": "https://api-football-v1.p.rapidapi.com/v3/timezone",
-            "method": "GET",
-            "headers": {
-                "x-rapidapi-host": "api-football-v1.p.rapidapi.com",
-                "x-rapidapi-key": "1461b4857amsh7c9dc9e81d5597fp183ad2jsn986025eda980"
-            }
-        };
-        
-        $.ajax(settings).done(function (response) {
-            console.log(response);
-        });
-
-        navigator.geolocation.getCurrentPosition(function(position) {
-            var latlng = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
-            var myOptions = {
-              zoom: 8,
-              center: latlng,
-              mapTypeId: google.maps.MapTypeId.TERRAIN,
-              disableDefaultUI: true
-            }
-            var map = new google.maps.Map(document.querySelector("#map_canvas"), myOptions);
-          });
+    
         // let canchaTenis = new Cancha("Tenis");
         // let canchaFutbol = new Cancha("Futbol");
         // let canchaPaddle = new Cancha("Paddle");
