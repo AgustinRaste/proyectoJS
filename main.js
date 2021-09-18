@@ -1,6 +1,7 @@
 
 class DatosReserva{
-    constructor(pCancha, pPrecio, pHorario){
+    constructor(pNroReserva, pCancha, pPrecio, pHorario){
+        this.nroReserva = pNroReserva;
         this.cancha = pCancha;
         this.precio = pPrecio;
         this.horario = pHorario;
@@ -11,9 +12,7 @@ class DatosReserva{
 
 class Reserva{
     constructor(pDatosReserva, pUsuario){
-        this.cancha = pDatosReserva.cancha;
-        this.horario = pDatosReserva.horario;
-        this.precio = pDatosReserva.precio;
+        this.datosReserva = pDatosReserva;
         this.usuario = pUsuario;
     }
 
@@ -69,7 +68,9 @@ class Cancha{
 function calcularReserva(){
     let seleccion = document.getElementById("selecCancha") 
     let montoSenia = document.getElementById("montoSenia").value;
-    cancha = seleccion.value;
+    let cancha = seleccion.value;
+    let precio = 0
+    let nroReserva = Math.trunc((Math.random() * (999 - 0) + 0)) ; 
 
     if (cancha == '1'){
         precio = 900;
@@ -93,7 +94,7 @@ function calcularReserva(){
     document.getElementById("displayPrecioFinal").innerHTML = "$" + precioFinal;
     
 
-    let miDatosReserva = new DatosReserva(cancha, precioFinal, horario)
+    let miDatosReserva = new DatosReserva(nroReserva, cancha, precioFinal, horario)
     const miDatosReservaJSON = JSON.stringify(miDatosReserva);
     console.log(miDatosReservaJSON);
     sessionStorage.setItem("miDatosReservaJSON", miDatosReservaJSON);
@@ -114,6 +115,8 @@ function confirmarUser(){
     $("#datosReserva").fadeIn(1000, function (){    $("#btnReset").fadeIn(1500);} )
     // $("#btnReset").fadeIn(1500) 
 
+    $("#btnConfirmar").fadeOut(1000);
+
     let uNombre = document.getElementById("nombreUserIn");
     let uApellido = document.getElementById("apellidoUserIn");
     let uDomicilio = document.getElementById("domicilioUserIn");
@@ -124,7 +127,7 @@ function confirmarUser(){
     const miUserJSON = JSON.stringify(miUser);
     // Guardo los datos en un session storeage para consultarlos despues
     // en el main
-    sessionStorage.setItem("miUserJASON", miUserJSON);
+    sessionStorage.setItem("miUserJSON", miUserJSON);
     
 
 
@@ -138,8 +141,6 @@ function confirmarUser(){
     document.getElementById("selecCancha").removeAttribute("disabled", "");
     document.getElementById("selecHora").removeAttribute("disabled", "");
     document.getElementById("montoSenia").removeAttribute("disabled", "");
-    console.log(miUser);
-
 
 }
 
@@ -147,6 +148,7 @@ function confirmarUser(){
 
 
 function accionesReset(){
+    $("#btnConfirmar").fadeiN(1000);
     let btnReset = document.getElementById("btnReset");
     btnReset.setAttribute("style", "display: none");
 
@@ -170,11 +172,22 @@ function accionesReset(){
     $("#reservas").fadeOut(1000);
     $("div").remove(".reservaCreada");
 
+
+
+
 }
 
 
 
 function agregarReserva(){
+    
+    let reservasJSON = sessionStorage.getItem("reservasJSON");
+    let arrReservas = JSON.parse(reservasJSON);
+    let miUser = sessionStorage.getItem("miUserJSON");
+    console.log(miUser)
+
+
+
     $("#reservas").slideDown(500)
 
     let miDatosReserva = JSON.parse(sessionStorage.getItem("miDatosReservaJSON"));
@@ -191,19 +204,28 @@ function agregarReserva(){
     
     // Se agrega la reserva a la lista
     $("#reservas").append(`<div class="reservaCreada">
+                            <p>Numero de Reserva: ${miDatosReserva.nroReserva} </p> 
                             <p>Cancha: ${cancha} </p> 
                             <p>Hora: ${miDatosReserva.horario}</p>
                             <p>$ ${miDatosReserva.precio}</p>
                             <hr/>
-                            </div>`)
+                            </div>`);
+
+    // Agregar reserva al arreglo JSON para luego levantarla en la tabla de reservas creadas
+    let nuevaReserva = new Reserva(miDatosReserva, miUser)
+    arrReservas.push(nuevaReserva);
+    reservasJSON = JSON.stringify(arrReservas);
+    sessionStorage.setItem("reservasJSON", reservasJSON);
+
+    console.log(nuevaReserva);
+
+    
     
     
     btnReservar.setAttribute("style", "display: none");
 
-
-    let horario = document.getElementById(miDatosReserva.horario);
-    console.log(horario)
-    console.log(miDatosReserva.horario)
+    console.log("arreglo de reservas: ");
+    console.log(arrReservas);
 }
 
 
@@ -252,8 +274,18 @@ function listarHorarios(){
 
 
 function test(){
-
-    $("#datosUser").fadeIn(1000)
+    // Solo genera un nuevoa rreglo si estuviera vacio el local
+    if(sessionStorage.length == 0){
+        var arrReservas = new Array();
+        console.log("Array de reservas desde la funcion main: ")
+        console.log(arrReservas)
+        
+        reservasJSON = JSON.stringify(arrReservas);
+    
+    
+        sessionStorage.setItem("reservasJSON", reservasJSON);
+    }
+    $("#datosUser").fadeIn(1000);
 
     // se esconde el boton de reset hasta que se ingresen los datos
 

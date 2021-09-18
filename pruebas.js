@@ -78,29 +78,49 @@ function borrarHorario(){
 };
 
 
-
+function eliminarUnElemento(){
+    let horariosJSON = sessionStorage.getItem("horariosJSON");
+    let horarios = JSON.parse(horariosJSON);
+    console.log(horarios);
+    let eliminar = parseInt(prompt("Que elemento desea eliminar? "));
+    horarios.splice(eliminar, 1);
+    console.log(horarios);
+    horariosJSON = JSON.stringify(horarios);
+    sessionStorage.setItem("horariosJSON", horariosJSON)
+}
 function test(){
+        
+
+        let miId = "1";
+        let miNombre = "Cancha de prueba";
+        let miHorarios = new Array("156", "154", "874");
+
         //Declaramos la url del archivo JSON local
         const URLJSON = "canchas.json";
+        let horariosJSON = JSON.stringify(miHorarios)
+        sessionStorage.setItem("horariosJSON", horariosJSON)
+
         //Agregamos un botón con jQuery
         $("body").prepend('<button id="btn1">JSON</button>');
 
-        $("#btn1").click(() => { 
-            $.getJSON(URLJSON, function (respuesta, estado) {
-                if(estado === "success"){
-                  let misDatos = respuesta;
-                  console.log(misDatos)
-                  for (let i = 0; i < 4; i++) {
-                    $("body").prepend(`<div>
-                    ${misDatos[0]}
-                                            <h3>${misDatos[0].id}</h3>
-                                            <p> ${misDatos[0].nombre}</p>
-                                            <p> ${misDatos[0].horarios[10]}</p>
-                                        </div>`)
-                  }  
-                }
-                });
-            });
+
+        $("#btn1").on("click", eliminarUnElemento);
+        // $("#btn1").click(() => { 
+        //     $.getJSON(URLJSON, function (respuesta, estado) {
+        //         if(estado === "success"){
+        //           let misDatos = respuesta;
+        //           console.log(misDatos)
+        //           for (let i = 0; i < 4; i++) {
+        //             $("body").prepend(`<div>
+        //             ${misDatos[0]}
+        //                                     <h3>${misDatos[0].id}</h3>
+        //                                     <p> ${misDatos[0].nombre}</p>
+        //                                     <p> ${misDatos[0].horarios[10]}</p>
+        //                                 </div>`)
+        //           }  
+        //         }
+        //         });
+        //     });
 
         $('#selecCancha').change( listarHorarios);
         
