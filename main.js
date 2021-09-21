@@ -1,3 +1,5 @@
+// Autor: AgustinRaste
+
 
 class DatosReserva{
     constructor(pNroReserva, pCancha, pPrecio, pHorario){
@@ -96,12 +98,9 @@ function calcularReserva(){
 
     let miDatosReserva = new DatosReserva(nroReserva, cancha, precioFinal, horario)
     const miDatosReservaJSON = JSON.stringify(miDatosReserva);
-    console.log(miDatosReservaJSON);
     sessionStorage.setItem("miDatosReservaJSON", miDatosReservaJSON);
 
     document.getElementById("btnReservar").setAttribute("style", " ");
-    console.log(miDatosReserva);
-    // agregarReserva(miDatosReserva)
 }
 
 function MontoSenia(){
@@ -111,9 +110,7 @@ function MontoSenia(){
 }
 
 function confirmarUser(){
-    // $("#datosReserva").fadeIn(1000) 
     $("#datosReserva").fadeIn(1000, function (){    $("#btnReset").fadeIn(1500);} )
-    // $("#btnReset").fadeIn(1500) 
 
     $("#btnConfirmar").fadeOut(1000);
 
@@ -133,7 +130,6 @@ function confirmarUser(){
 
     console.log("Usuario ingresado!");
     $("#nombreUser").text(uNombre.value + " " + uApellido.value);
-    // document.getElementById("nombreUser").innerHTML = uNombre.value + " " + uApellido.value;
     uNombre.setAttribute("disabled", " ");
     uApellido.setAttribute("disabled", " ");
     uDomicilio.setAttribute("disabled", " ");
@@ -224,15 +220,20 @@ function agregarReserva(){
     
     btnReservar.setAttribute("style", "display: none");
 
-    console.log("arreglo de reservas: ");
-    console.log(arrReservas);
 }
 
 
 function listarHorarios(){
     let seleccion = $("#selecCancha").val();
     const URLJSON = "canchas.json";
-
+    let horariosReservadosF = new Array();
+    let horariosReservadosT = new Array();
+    let horariosReservadosP = new Array();
+    // Traigo el array de reservas para comparar contra los horarios ya reservados
+    let reservasJSON = sessionStorage.getItem("reservasJSON");
+    let arrReservas = JSON.parse(reservasJSON);
+    let n = arrReservas.length;
+ 
     // Aplico este metodo para borrar los options cargados en otra ocasion 
     $("#selecHora").empty();
 
@@ -245,25 +246,62 @@ function listarHorarios(){
             
             
             if (seleccion == '1'){
-                
-                for (const horario in horariosDisp){
-                    $("#selecHora").append(`<option>${horariosDisp[horario]}</option>`)
+                for(let i = 0; i < n; i++){
+                    let datos = arrReservas[i].datosReserva;
+                    if(datos.cancha == '1'){
+                        horariosReservadosF.push(datos.horario)
+                    }
+                }
+
+                // Listar solo los horarios que no fueron reservados
+                for (const horario in horariosDisp){ 
+                    if(horariosReservadosF.indexOf(horariosDisp[horario].toString()) == -1){
+                        $("#selecHora").append(`<option>${horariosDisp[horario]}</option>`);
+                    }
+                    else{
+                        $("#selecHora").append(`<option disabled>${horariosDisp[horario]}</option>`)  
+                    }
                     
                 }
             }
             if (seleccion == '2'){
+
+                for(let i = 0; i < n; i++){
+                    let datos = arrReservas[i].datosReserva;
+                    if(datos.cancha == '2'){
+                        horariosReservadosT.push(datos.horario)
+                    }
+                }
                 
-                for (const horario in horariosDisp){
-                    $("#selecHora").append(`<option>${horariosDisp[horario]}</option>`)
-                    console.log(horariosDisp[horario])
+                // Listar solo los horarios que no fueron reservados
+                for (const horario in horariosDisp){ 
+                    if(horariosReservadosT.indexOf(horariosDisp[horario].toString()) == -1){
+                        $("#selecHora").append(`<option>${horariosDisp[horario]}</option>`);
+                    }
+                    else{
+                        $("#selecHora").append(`<option disabled>${horariosDisp[horario]}</option>`)  
+                    }
+                    
                 }
                 
             }
             if (seleccion == '3'){
-                
-                for (const horario in horariosDisp){
-                    $("#selecHora").append(`<option>${horariosDisp[horario]}</option>`)
-                    console.log(horariosDisp[horario])
+
+                for(let i = 0; i < n; i++){
+                    let datos = arrReservas[i].datosReserva;
+                    if(datos.cancha == '3'){
+                        horariosReservadosP.push(datos.horario)
+                    }
+                }
+                // Listar solo los horarios que no fueron reservados
+                for (const horario in horariosDisp){ 
+                    if(horariosReservadosP.indexOf(horariosDisp[horario].toString()) == -1){
+                        $("#selecHora").append(`<option>${horariosDisp[horario]}</option>`);
+                    }
+                    else{
+                        $("#selecHora").append(`<option disabled>${horariosDisp[horario]}</option>`)  
+                    }
+                    
                 }
                 
             }
@@ -277,14 +315,10 @@ function test(){
     // Solo genera un nuevoa rreglo si estuviera vacio el local
     if(sessionStorage.length == 0){
         var arrReservas = new Array();
-        console.log("Array de reservas desde la funcion main: ")
-        console.log(arrReservas)
-        
         reservasJSON = JSON.stringify(arrReservas);
-    
-    
         sessionStorage.setItem("reservasJSON", reservasJSON);
     }
+
     $("#datosUser").fadeIn(1000);
 
     // se esconde el boton de reset hasta que se ingresen los datos
